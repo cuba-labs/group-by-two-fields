@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.sample.web.orderitem.OrderItemBrowse"
+        focusComponent="orderItemsTable"
+        lookupComponent="orderItemsTable"
+        messagesPack="com.company.sample.web.orderitem">
+    <dsContext>
+        <groupDatasource id="orderItemsDs"
+                         class="com.company.sample.entity.OrderItem"
+                         view="orderItem-with-product">
+            <query>
+                <![CDATA[select e from sample$OrderItem e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderItemsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="orderItemsTable"
+                datasource="orderItemsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="orderItemsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="product"/>
+                <column id="quantity"/>
+            </columns>
+            <rows datasource="orderItemsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="orderItemsTable.create"/>
+                <button id="editBtn"
+                        action="orderItemsTable.edit"/>
+                <button id="removeBtn"
+                        action="orderItemsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>
